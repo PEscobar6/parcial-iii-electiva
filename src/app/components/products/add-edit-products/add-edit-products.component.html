@@ -1,0 +1,110 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div *ngIf="!loading" class="row mt-1">
+    <div class="col-lg-4 offset-lg-4">
+        <div class="card border-secondary mb-3" style="max-width: 40rem;">
+            <div class="card-header text-center">{{ operacion }} Producto</div>
+            <div class="card-body">
+                <form [formGroup]="form" (ngSubmit)="addProduct()">
+                    <div class="form-group">
+                        <label for="codigo" class="form-label mt-4">
+                            Código
+                        </label>
+                        <input
+                            formControlName="codigo"
+                            type="text"
+                            class="form-control"
+                            id="codigo"
+                            placeholder="Ingrese código"
+                        />
+                        <span *ngIf="form.get('codigo')?.hasError('required') && form.get('codigo')?.touched">
+                            El campo código es <strong>requerido</strong>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre" class="form-label mt-4">
+                            Nombre
+                        </label>
+                        <input
+                            formControlName="nombre"
+                            type="text"
+                            class="form-control"
+                            id="nombre"
+                            placeholder="Ingrese Nombre"
+                        />
+                        <span *ngIf="form.get('nombre')?.hasError('required') && form.get('nombre')?.touched">
+                            El campo nombre es <strong>requerido</strong>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="valorUnitario" class="form-label mt-4">
+                            Valor Unitario
+                        </label>
+                        <input
+                            formControlName="valorUnitario"
+                            type="number"
+                            class="form-control"
+                            id="valorUnitario"
+                            placeholder="Ingrese Nombre"
+                        />
+                        <span *ngIf="form.get('valorUnitario')?.hasError('required') && form.get('valorUnitario')?.touched">
+                            El campo Valor Unitario es <strong>requerido</strong>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="fechaExpedicion" class="form-label mt-4">
+                            Fecha Expedicion
+                        </label>
+                        <input
+                            type="date"
+                            formControlName="fechaExpedicion"
+                            class="form-control"
+                            id="fechaExpedicion"
+                            placeholder="Seleccione fecha"
+                        />
+                        <span *ngIf="form.get('fechaExpedicion')?.hasError('required') && form.get('fechaExpedicion')?.touched">
+                            El campo Fecha Expedicion es <strong>requerido</strong>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="fechaVencimiento" class="form-label mt-4">
+                            Fecha Vencimiento
+                        </label>
+                        <input
+                            type="date"
+                            formControlName="fechaVencimiento"
+                            class="form-control"
+                            id="fechaVencimiento"
+                            placeholder="Seleccione fecha"
+                        />
+                        <span *ngIf="form.get('fechaVencimiento')?.hasError('required') && form.get('fechaVencimiento')?.touched">
+                            El campo Fecha Vencimiento es <strong>requerido</strong>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="marcaId" class="form-label mt-4">
+                            Marca
+                        </label>
+                        <select formControlName="marcaId" name="marcaId" id="marcaId" class="form-select">
+                            <option selected="" value="">Seleccione</option>
+                            <option *ngFor="let brand of brands" 
+                                [value]="brand.id" >
+                                {{brand.nombre}}
+                            </option>
+                        </select>
+                        <span *ngIf="form.get('marcaId')?.hasError('required') && form.get('marcaId')?.touched">
+                            Debe seleccionar una Marca
+                        </span>
+                    </div>
+                    <div class="row mt-2 text-center">
+                        <div class="col-lg-6">
+                            <button routerLink="/products" type="button" class="btn btn-secondary">Volver</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Aceptar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

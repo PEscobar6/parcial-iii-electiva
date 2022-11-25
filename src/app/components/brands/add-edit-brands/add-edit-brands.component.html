@@ -1,0 +1,65 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div class="row mt-1">
+  <div class="col-md-4 offset-md-4">
+    <div class="card border-secondary mb-3" style="max-width: 40rem">
+      <div class="card-header text-center">{{svc}} Marca</div>
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="addProduct()">
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="form-label mt-4">
+                    Código
+                </label>
+                <input
+                    formControlName="codigo"
+                    type="text"
+                    class="form-control"
+                    id="codigo"
+                    placeholder="Ingrese código"
+                />
+                <span *ngIf="form.get('codigo')?.hasError('required') && form.get('codigo')?.touched">
+                    El campo código es <strong>requerido</strong>
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="form-label mt-4">
+                    Nombre
+                </label>
+                <input
+                    formControlName="nombre"
+                    type="text"
+                    class="form-control"
+                    id="nombre"
+                    placeholder="Ingrese nombre"
+                />
+                <span *ngIf="form.get('nombre')?.hasError('required') && form.get('nombre')?.touched">
+                    El campo nombre es <strong>requerido</strong>
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="form-label mt-4">
+                    Descripción
+                </label>
+                <input
+                    formControlName="descripcion"
+                    type="text"
+                    class="form-control"
+                    id="descripcion"
+                    placeholder="Ingrese descripcion"
+                />
+                <span *ngIf="form.get('descripcion')?.hasError('required') && form.get('descripcion')?.touched">
+                    El campo descripcion es <strong>requerido</strong>
+                </span>
+            </div>
+            <div class="row mt-2 text-center">
+                <div class="col-md-6">
+                    <button routerLink="/marcas" type="button" class="btn btn-light">Volver</button>
+                </div>
+                <div class="col-md-6">
+                    <button [disabled]="form.invalid" type="submit" class="btn btn-{{id == 0 ? 'success' : 'info'}}">{{id == 0 ? "Guardar" : "Editar"}}</button>
+                </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
